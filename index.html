@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Happy Birthday Pratyusha! ✨🎂</title>
+  <meta name="description" content="A magical, interactive birthday surprise for Pratyusha!" />
+  <meta name="theme-color" content="#1a0b2e" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Canvas for interactive background stars, floating lanterns & fireworks -->
+  <canvas id="stars-canvas"></canvas>
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- ==================== CURTAIN RAISER / GIFT UNWRAP MODAL ==================== -->
+  <div id="gift-curtain" class="gift-curtain active">
+    <div class="curtain-content">
+      <div class="sparkle-badge">🔱 October 20 • Maha Navami Durga Puja Special ✨</div>
+      <h1 class="curtain-title">For Pratyusha 💖</h1>
+      <p class="curtain-subtitle">Crafted with all my heart by Pritam to celebrate your auspicious birthday.</p>
+
+      <div class="gift-box-container" id="gift-box-trigger" title="Click to unwrap your birthday surprise!">
+        <div class="gift-bow">
+          <div class="bow-knot"></div>
+          <div class="bow-loop left"></div>
+          <div class="bow-loop right"></div>
+        </div>
+        <div class="gift-lid">
+          <div class="lid-ribbon"></div>
+        </div>
+        <div class="gift-body">
+          <div class="body-ribbon-v"></div>
+          <div class="body-ribbon-h"></div>
+          <div class="gift-tag">
+            <span>To: Pratyusha ✨</span>
+            <span class="from-tag">From: Pritam 💖</span>
+          </div>
+        </div>
+        <div class="gift-pulse-glow"></div>
+      </div>
+
+      <button class="btn-unwrap" id="btn-unwrap-click">
+        <span>🎁 Tap to Open Your Surprise</span>
+      </button>
+      <p class="tap-hint">Turn your volume up for the best experience 🔊</p>
+    </div>
+  </div>
+
+  <!-- ==================== FLOATING MUSIC & AMBIENT CONTROLS ==================== -->
+  <div class="floating-controls">
+    <button class="control-btn music-btn" id="music-toggle" title="Play / Pause Birthday Music">
+      <span class="music-icon" id="music-disc">🎵</span>
+      <span class="btn-tooltip">Birthday Music</span>
+    </button>
+    <button class="control-btn" id="confetti-blast-btn" title="Shower more confetti!">
+      <span>🎉</span>
+      <span class="btn-tooltip">Celebration Shower</span>
+    </button>
+    <button class="control-btn" id="custom-photo-btn" title="Personalize Photos & Letter">
+      <span>⚙️</span>
+      <span class="btn-tooltip">Personalize</span>
+    </button>
+  </div>
+
+  <!-- Custom audio element (synthesizer runs automatically, custom file optional) -->
+  <input type="file" id="custom-audio-input" accept="audio/*" style="display:none;" />
+
+  <!-- ==================== MAIN CELEBRATION APP ==================== -->
+  <main class="main-wrapper" id="main-content">
+    
+    <!-- Hero Banner Section -->
+    <header class="hero-section">
+      <div class="hero-decorations">
+        <div class="balloon-float balloon-1">🎈</div>
+        <div class="balloon-float balloon-2">💖</div>
+        <div class="balloon-float balloon-3">🔱</div>
+        <div class="balloon-float balloon-4">🎂</div>
+        <div class="balloon-float balloon-5">🌸</div>
+      </div>
+
+      <div class="glass-pill-badge puja-pill-badge">
+        <span>🔱 SHUBHO MAHA NAVAMI • CELEBRATING PRATYUSHA'S BIRTHDAY 🔱</span>
+      </div>
+
+      <h1 class="celebration-title">
+        Happy Birthday,<br />
+        <span class="name-gradient">Pratyusha!</span>
+      </h1>
+
+      <p class="hero-tagline">
+        Born on the divine and auspicious day of <strong>Maha Navami</strong>! May Maa Durga's eternal light, strength, and joy illuminate every path you take in life.
+      </p>
+
+      <div class="stats-badges">
+        <div class="stat-card puja-stat">
+          <span class="stat-emoji">🔱</span>
+          <span class="stat-text">Maha Navami Blessings</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-emoji">🗓️</span>
+          <span class="stat-text">October 20</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-emoji">💖</span>
+          <span class="stat-text">Most Precious Friend</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-emoji">👑</span>
+          <span class="stat-text">Birthday Queen</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==================== CHAPTER 1: INTERACTIVE CAKE & CANDLE BLOW ==================== -->
+    <section class="section-card cake-section" id="cake-chapter">
+      <div class="section-badge">Chapter 01 • The Birthday Wish</div>
+      <h2 class="section-heading">Make a Wish & Blow the Candles</h2>
+      <p class="section-desc">Close your eyes, make your deepest secret wish, and blow out the candles!</p>
+
+      <div class="cake-display-area">
+        <!-- Birthday Cake Construction -->
+        <div class="cake-container">
+          <!-- Plate -->
+          <div class="cake-plate"></div>
+
+          <!-- Bottom Tier -->
+          <div class="cake-tier tier-bottom">
+            <div class="tier-frosting">
+              <span class="drip drip-1"></span>
+              <span class="drip drip-2"></span>
+              <span class="drip drip-3"></span>
+              <span class="drip drip-4"></span>
+              <span class="drip drip-5"></span>
+            </div>
+            <div class="tier-decorations">
+              <span class="pearl p1"></span><span class="pearl p2"></span>
+              <span class="pearl p3"></span><span class="pearl p4"></span>
+            </div>
+          </div>
+
+          <!-- Middle Tier -->
+          <div class="cake-tier tier-middle">
+            <div class="tier-frosting">
+              <span class="drip drip-1"></span>
+              <span class="drip drip-2"></span>
+              <span class="drip drip-3"></span>
+            </div>
+            <div class="cake-ribbon-text">P R A T Y U S H A</div>
+          </div>
+
+          <!-- Top Tier -->
+          <div class="cake-tier tier-top">
+            <div class="tier-frosting">
+              <span class="drip drip-1"></span>
+              <span class="drip drip-2"></span>
+            </div>
+
+            <!-- Candles Array -->
+            <div class="candles-wrapper">
+              <div class="candle candle-1" data-id="1">
+                <div class="candle-flame"></div>
+                <div class="candle-smoke"></div>
+                <div class="candle-stick"></div>
+              </div>
+              <div class="candle candle-2" data-id="2">
+                <div class="candle-flame"></div>
+                <div class="candle-smoke"></div>
+                <div class="candle-stick"></div>
+              </div>
+              <div class="candle candle-3" data-id="3">
+                <div class="candle-flame"></div>
+                <div class="candle-smoke"></div>
+                <div class="candle-stick"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blow Button and Feedback -->
+      <div class="cake-actions">
+        <button class="btn-action blow-btn" id="btn-blow-candles">
+          <span>💨 Tap to Blow Out All Candles!</span>
+        </button>
+        <span class="candle-counter-text" id="candle-status">3 candles glowing bright ✨ (Click each candle or tap the button)</span>
+      </div>
+
+      <!-- Wish Unlocked Banner -->
+      <div class="wish-granted-banner hidden" id="wish-granted-banner">
+        <div class="wish-banner-sparkle">🎉 🎂 ✨</div>
+        <h3>Wish Sent to the Stars!</h3>
+        <p>May all the magic, laughter, and joy in this world find their way to you, Pratyusha!</p>
+      </div>
+    </section>
+
+    <!-- ==================== CHAPTER 2: MAHA NAVAMI PUJA BLESSINGS ==================== -->
+    <section class="section-card navami-section" id="navami-chapter">
+      <div class="divine-aura-glow"></div>
+      <div class="section-badge divine-badge">🔱 Divine Blessing • Maha Navami Durga Puja 🪔</div>
+      <h2 class="section-heading divine-title">Maha Navami Divine Aura</h2>
+      <p class="section-desc">
+        Your birthday coincides with the most sacred celebration of Durga Puja—<strong>Maha Navami</strong>. A day of victory, grace, divine courage, and boundless joy!
+      </p>
+
+      <div class="navami-blessing-card">
+        <div class="divine-icons-row">
+          <span class="divine-icon">🔱</span>
+          <span class="divine-icon">🪷</span>
+          <span class="divine-icon">🪔</span>
+          <span class="divine-icon">🌾</span>
+        </div>
+        <h3 class="bengali-blessing">🌸 শুভ মহানবমী ও শুভ জন্মদিন, প্রত্যুষা! 🌸</h3>
+        <p class="divine-quote">
+          "May Maa Durga grant you the fierce strength of Shakti, the purity of kash phool, and a life illuminated with peace, radiant health, and boundless laughter."
+        </p>
+
+        <!-- Interactive Diya Lighting Ceremony -->
+        <div class="diya-ceremony-area">
+          <div class="diya-lamp" id="diya-lamp" title="Tap to light the sacred Diya for Pratyusha">
+            <div class="diya-flame" id="diya-flame"></div>
+            <div class="diya-glow"></div>
+            <div class="diya-plate">🪔</div>
+          </div>
+          <button class="btn-action btn-diya" id="btn-light-diya">
+            <span>🪔 Light the Sacred Diya for Pratyusha</span>
+          </button>
+          <span class="diya-status-text" id="diya-status">Tap the Diya to invoke Maa Durga's eternal blessings ✨</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CHAPTER 3: WAX-SEALED LETTER ==================== -->
+    <section class="section-card envelope-section" id="letter-chapter">
+      <div class="section-badge">Chapter 03 • From the Heart</div>
+      <h2 class="section-heading">A Letter Sealed With Love</h2>
+      <p class="section-desc">Tap the wax seal to unlock your birthday letter.</p>
+
+      <div class="envelope-interactive-wrapper">
+        <div class="envelope-box" id="envelope-trigger">
+          <div class="envelope-flap" id="envelope-flap"></div>
+          <div class="envelope-pocket"></div>
+          <div class="wax-seal" id="wax-seal-btn" title="Tap to Break Seal & Read">
+            <span class="seal-letter">P</span>
+          </div>
+
+          <!-- The Unfolded Letter -->
+          <div class="parchment-letter" id="parchment-letter">
+            <div class="parchment-header">
+              <span class="parchment-date" id="letter-date">October 20</span>
+              <span class="parchment-badge">With Deepest Affection 💌</span>
+            </div>
+            
+            <div class="parchment-body">
+              <h3 class="letter-salutation">Dearest Pratyusha,</h3>
+              
+              <p class="letter-para" id="letter-para-1">
+                Happy Birthday! Today on October 20, we celebrate the special day the universe was blessed with someone truly remarkable. Having your birthday fall on the sacred and joyous day of Maha Navami makes this celebration even more celestial and divine.
+              </p>
+              
+              <p class="letter-para" id="letter-para-2">
+                Thank you for being such an extraordinary, genuine friend. For your kind heart, your infectious laughter, and for always being authentically yourself. Through every high and every quiet moment, having you in my life has been one of my greatest blessings. May Maa Durga always protect your beautiful smile and grant you strength and happiness!
+              </p>
+
+              <p class="letter-para" id="letter-para-3">
+                As you step into another fabulous year of life today, I wish you endless adventures, peaceful moments, boundless success, and smiles that light up the cosmos. Keep shining bright, Pratyusha—the world is so much sweeter with you in it!
+              </p>
+
+              <div class="letter-signature">
+                <span>Always cheering for you & by your side,</span>
+                <span class="signature-name" id="letter-signature-name">With all my love, Pritam 💖</span>
+              </div>
+            </div>
+
+            <div class="parchment-footer">
+              <button class="btn-secondary" id="btn-edit-letter">✏️ Edit Letter Note</button>
+              <button class="btn-secondary" id="btn-close-letter">Fold Letter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CHAPTER 4: MEMORY POLAROID WALL ==================== -->
+    <section class="section-card gallery-section" id="gallery-chapter">
+      <div class="section-badge">Chapter 04 • Treasured Moments</div>
+      <h2 class="section-heading">Memory Polaroid Wall</h2>
+      <p class="section-desc">Pujo vibes and unforgettable memories together! Tap any card to enlarge or upload more photos.</p>
+
+      <div class="gallery-toolbar">
+        <label for="photo-file-input" class="btn-action photo-upload-btn">
+          <span>📸 Add / Change Photos</span>
+          <input type="file" id="photo-file-input" accept="image/*" multiple style="display:none;" />
+        </label>
+        <button class="btn-secondary" id="btn-reset-photos">Reset to Default</button>
+      </div>
+
+      <div class="polaroid-grid" id="polaroid-grid">
+        <!-- Polaroid 1 (User Photo 1) -->
+        <div class="polaroid-card tilt-left" data-caption="Pujo vibes, radiant smiles & our favorite memories together ✨">
+          <div class="tape-strip"></div>
+          <div class="polaroid-img-wrapper">
+            <img src="photo_2026-10-19_23-00-01.jpg" alt="Pritam and Pratyusha" class="polaroid-img loaded" id="polaroid-img-0" />
+            <div class="polaroid-placeholder" id="placeholder-0" style="display:none;">
+              <span class="card-icon">🌸</span>
+              <span class="card-hint">Radiant Soul</span>
+            </div>
+          </div>
+          <div class="polaroid-caption">Pujo vibes, sweet smiles & our favorite moments ✨</div>
+        </div>
+
+        <!-- Polaroid 2 (User Photo 2) -->
+        <div class="polaroid-card tilt-right" data-caption="With the sweetest, most special person by my side 💖">
+          <div class="pin-marker"></div>
+          <div class="polaroid-img-wrapper">
+            <img src="photo_2026-10-19_22-59-50.jpg" alt="Pritam and Pratyusha" class="polaroid-img loaded" id="polaroid-img-1" />
+            <div class="polaroid-placeholder" id="placeholder-1" style="display:none;">
+              <span class="card-icon">✨</span>
+              <span class="card-hint">Pure Joy</span>
+            </div>
+          </div>
+          <div class="polaroid-caption">With the sweetest person by my side 💖</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== GRAND FINALE / FOOTER ==================== -->
+    <footer class="celebration-footer">
+      <div class="footer-heart">💖</div>
+      <h3 class="footer-title">Happy Birthday, Pratyusha!</h3>
+      <p class="footer-text">
+        Crafted with all my love, warmth, and care by Pritam to make your October 20 unforgettable.
+      </p>
+      <div class="share-links">
+        <button class="btn-secondary" id="btn-replay-celebration">↺ Replay Grand Entrance</button>
+      </div>
+      <div class="footer-copyright">
+        ✨ October 20 • Happy Birthday Pratyusha • With love from Pritam ✨
+      </div>
+    </footer>
+  </main>
+
+  <!-- ==================== MODALS ==================== -->
+  <!-- Polaroid Zoom Lightbox Modal -->
+  <div class="modal-backdrop hidden" id="image-modal">
+    <div class="modal-dialog">
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+      <div class="modal-img-container" id="modal-content-area">
+        <!-- dynamically inserted -->
+      </div>
+      <p class="modal-caption-text" id="modal-caption-text"></p>
+    </div>
+  </div>
+
+  <!-- Letter Edit Modal -->
+  <div class="modal-backdrop hidden" id="edit-letter-modal">
+    <div class="modal-dialog edit-dialog">
+      <button class="modal-close" id="edit-letter-close">&times;</button>
+      <h3>Personalize the Birthday Letter</h3>
+      <p class="edit-hint">Customize what Pratyusha reads in the wax-sealed letter:</p>
+      
+      <label>Paragraph 1:</label>
+      <textarea id="edit-p1" rows="3"></textarea>
+
+      <label>Paragraph 2:</label>
+      <textarea id="edit-p2" rows="3"></textarea>
+
+      <label>Paragraph 3:</label>
+      <textarea id="edit-p3" rows="3"></textarea>
+
+      <label>Your Sign-off:</label>
+      <input type="text" id="edit-sig" />
+
+      <div class="modal-btn-row">
+        <button class="btn-action" id="btn-save-letter">Save Changes</button>
+        <button class="btn-secondary" id="btn-cancel-letter">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+</html>
